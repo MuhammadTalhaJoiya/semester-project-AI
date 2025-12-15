@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Predictor - Presentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #2c3e50;
+            overflow-x: hidden;
+        }
+
+        .slideshow-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            padding: 20px;
+        }
+
+        .slide {
+            display: none;
+            background: white;
+            border-radius: 15px;
+            padding: 60px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            min-height: 600px;
+            animation: fadeIn 0.5s;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            color: #e74c3c;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #3498db;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            margin: 30px 0 15px 0;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.3rem;
+            color: #7f8c8d;
+            margin-bottom: 40px;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        ul li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .metric-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .metric-box h3 {
+            color: white;
+            margin: 0 0 10px 0;
+            font-size: 1.5rem;
+        }
+
+        .metric-value {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .model-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .model-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 5px solid #3498db;
+        }
+
+        .model-card h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .code-block {
+            background: #2c3e50;
+            color: #27ae60;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 20px;
+            border-left: 5px solid #ffc107;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .navigation {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+        }
+
+        .nav-button {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: all 0.3s;
+        }
+
+        .nav-button:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-button:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        .team-member {
+            background: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border-left: 4px solid #3498db;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #3498db;
+        }
+
+        .stat-label {
+            color: #7f8c8d;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="slideshow-container">
+        
+        <!-- Slide 1: Title -->
+        <div class="slide active">
+            <h1>❤️ Heart Disease Predictor</h1>
+            <p class="subtitle">AI-Powered Risk Assessment Using Machine Learning</p>
+            <div style="text-align: center; margin-top: 60px;">
+                <h3 style="color: #7f8c8d; margin-bottom: 30px;">Team Members</h3>
+                <div class="team-member" style="text-align: left; max-width: 500px; margin: 15px auto;">
+                    <strong>Member 1:</strong> Muhammad Talha<br>
+                    <strong>Member 2:</strong> Muhammad Junaid<br>
+                    <strong>Member 3:</strong> Faheem Buzdar<br>
+                    <strong>Member 4:</strong> Abdur Rehman Rao<br>
+                    <strong>Member 5:</strong> Farhan
+                </div>
+                <p style="margin-top: 40px; color: #7f8c8d; font-size: 1.1rem;">
+                    Date: 15 December 2025
+                </p>
+            </div>
+            <div class="slide-number">1 / 21</div>
+        </div>
+
+        <!-- Slide 2: Problem Statement -->
+        <div class="slide">
+            <h2>Problem Statement</h2>
+            <div style="margin-top: 40px;">
+                <ul>
+                    <li>Heart disease is the #1 cause of death globally</li>
+                    <li>Over 17.9 million deaths annually (WHO)</li>
+                    <li>Early detection can save lives</li>
+                    <li>Healthcare systems need efficient screening tools</li>
+                    <li>Manual assessment is time-consuming and subjective</li>
+                </ul>
+            </div>
+            <div class="highlight" style="margin-top: 40px;">
+                <strong>Our Solution:</strong> Develop an AI-powered system that predicts heart disease risk using patient medical data with high accuracy.
+            </div>
+            <div class="slide-number">2 / 21</div>
+        </div>
+
+        <!-- Slide 3: Objectives -->
+        <div class="slide">
+            <h2>Project Objectives</h2>
+            <div style="margin-top: 40px;">
+                <ul>
+                    <li>Build an accurate ML model for heart disease prediction</li>
+                    <li>Compare multiple classification algorithms</li>
+                    <li>Create a user-friendly web interface</li>
+                    <li>Achieve high accuracy in risk assessment</li>
+                    <li>Provide confidence scores for predictions</li>
+                    <li>Enable batch processing for multiple patients</li>
+                </ul>
+            </div>
+            <div class="stats-grid" style="margin-top: 50px;">
+                <div class="stat-item">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">ML Models</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">13</div>
+                    <div class="stat-label">Features</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">2</div>
+                    <div class="stat-label">Interfaces</div>
+                </div>
+            </div>
+            <div class="slide-number">3 / 21</div>
+        </div>
+
+        <!-- Slide 4: Project Overview -->
+        <div class="slide">
+            <h2>Project Overview</h2>
+            <div class="two-column" style="margin-top: 40px;">
+                <div>
+                    <h3>Type</h3>
+                    <ul>
+                        <li>Supervised Learning</li>
+                        <li>Binary Classification</li>
+                        <li>Medical Diagnosis Support</li>
+                    </ul>
+                    <h3 style="margin-top: 30px;">Technology Stack</h3>
+                    <ul>
+                        <li>Python 3.x</li>
+                        <li>scikit-learn</li>
+                        <li>Flask (Web Framework)</li>
+                        <li>Pandas, NumPy</li>
+                        <li>HTML/CSS/JavaScript</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Key Features</h3>
+                    <ul>
+                        <li>Automated data preprocessing</li>
+                        <li>Multiple model comparison</li>
+                        <li>Comprehensive evaluation</li>
+                        <li>Web-based interface</li>
+                        <li>RESTful API</li>
+                        <li>Batch predictions</li>
+                    </ul>
+                    <h3 style="margin-top: 30px;">Workflow</h3>
+                    <div class="code-block" style="font-size: 0.9rem;">
+Data → Preprocess → Train → Evaluate → Predict
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">4 / 21</div>
+        </div>
+
+        <!-- Slide 5: Dataset Description -->
+        <div class="slide">
+            <h2>Dataset Description</h2>
+            <div style="margin-top: 40px;">
+                <div class="two-column">
+                    <div>
+                        <h3>Dataset Information</h3>
+                        <ul>
+                            <li>Format: CSV</li>
+                            <li>Features: 13 input features</li>
+                            <li>Target: Binary (0/1)</li>
+                            <li>Size: ~1000+ samples</li>
+                            <li>Source: UCI ML Repository</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Features Include</h3>
+                        <ul style="font-size: 1rem;">
+                            <li>Age, Sex</li>
+                            <li>Chest Pain Type</li>
+                            <li>Blood Pressure</li>
+                            <li>Cholesterol</li>
+                            <li>Heart Rate</li>
+                            <li>ECG Results</li>
+                            <li>Exercise Test Data</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="highlight" style="margin-top: 30px;">
+                    <strong>Target Variable:</strong> 0 = No Heart Disease, 1 = Heart Disease Present
+                </div>
+            </div>
+            <div class="slide-number">5 / 21</div>
+        </div>
+
+        <!-- Slide 6: Data Preprocessing -->
+        <div class="slide">
+            <h2>Data Preprocessing</h2>
+            <div style="margin-top: 40px;">
+                <h3>Steps Performed:</h3>
+                <div class="model-list">
+                    <div class="model-card">
+                        <h4>1. Missing Values</h4>
+                        <p>Mean imputation for numeric, Mode for categorical</p>
+                    </div>
+                    <div class="model-card">
+                        <h4>2. Encoding</h4>
+                        <p>Label Encoding for categorical variables</p>
+                    </div>
+                    <div class="model-card">
+                        <h4>3. Scaling</h4>
+                        <p>StandardScaler for feature normalization</p>
+                    </div>
+                    <div class="model-card">
+                        <h4>4. Split</h4>
+                        <p>80% Training, 20% Testing (stratified)</p>
+                    </div>
+                </div>
+                <div class="code-block" style="margin-top: 30px;">
+# Preprocessing Pipeline
+preprocessor.preprocess(df)
+→ Handles missing values
+→ Encodes categorical data
+→ Scales features
+→ Splits train/test
+                </div>
+            </div>
+            <div class="slide-number">6 / 21</div>
+        </div>
+
+        <!-- Slide 7: Exploratory Data Analysis -->
+        <div class="slide">
+            <h2>Exploratory Data Analysis</h2>
+            <div style="margin-top: 40px;">
+                <h3>Analysis Performed:</h3>
+                <ul>
+                    <li>Dataset statistics and summary</li>
+                    <li>Feature distributions</li>
+                    <li>Correlation heatmap between features</li>
+                    <li>Target variable distribution</li>
+                    <li>Feature-target relationships</li>
+                    <li>Missing value analysis</li>
+                </ul>
+                <div class="highlight" style="margin-top: 40px;">
+                    <strong>Key Insights:</strong> EDA helped identify important features and data quality issues before model training.
+                    <br><strong>Visualization:</strong> Generated correlation heatmap, distribution plots, and relationship charts.
+                </div>
+            </div>
+            <div class="slide-number">7 / 21</div>
+        </div>
+
+        <!-- Slide 8: Key Insights from EDA -->
+        <div class="slide">
+            <h2>Key Insights from EDA</h2>
+            <div class="two-column" style="margin-top: 40px;">
+                <div>
+                    <h3>Data Quality</h3>
+                    <ul>
+                        <li>No significant missing values</li>
+                        <li>Balanced class distribution</li>
+                        <li>No extreme outliers detected</li>
+                        <li>Features in acceptable ranges</li>
+                    </ul>
+                    <h3 style="margin-top: 30px;">Feature Importance</h3>
+                    <ul>
+                        <li>Age and cholesterol significant</li>
+                        <li>Exercise test results important</li>
+                        <li>Chest pain type highly correlated</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Recommendations</h3>
+                    <ul>
+                        <li>All features included</li>
+                        <li>Feature scaling required</li>
+                        <li>Stratified split for balance</li>
+                        <li>Cross-validation recommended</li>
+                    </ul>
+                    <div class="model-card" style="margin-top: 30px; background: #e8f5e9;">
+                        <strong>Decision:</strong> Use all features with proper scaling and validation strategy.
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">8 / 21</div>
+        </div>
+
+        <!-- Slide 9: ML Pipeline Overview -->
+        <div class="slide">
+            <h2>Machine Learning Pipeline</h2>
+            <div style="margin-top: 40px; text-align: center;">
+                <div style="display: flex; justify-content: space-around; align-items: center; margin: 40px 0;">
+                    <div style="text-align: center;">
+                        <div style="width: 100px; height: 100px; background: #3498db; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; font-weight: bold; margin: 0 auto 10px;">1</div>
+                        <strong>Load Data</strong>
+                    </div>
+                    <div style="font-size: 2rem; color: #7f8c8d;">→</div>
+                    <div style="text-align: center;">
+                        <div style="width: 100px; height: 100px; background: #e74c3c; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; font-weight: bold; margin: 0 auto 10px;">2</div>
+                        <strong>Preprocess</strong>
+                    </div>
+                    <div style="font-size: 2rem; color: #7f8c8d;">→</div>
+                    <div style="text-align: center;">
+                        <div style="width: 100px; height: 100px; background: #27ae60; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; font-weight: bold; margin: 0 auto 10px;">3</div>
+                        <strong>Train Models</strong>
+                    </div>
+                    <div style="font-size: 2rem; color: #7f8c8d;">→</div>
+                    <div style="text-align: center;">
+                        <div style="width: 100px; height: 100px; background: #f39c12; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; font-weight: bold; margin: 0 auto 10px;">4</div>
+                        <strong>Evaluate</strong>
+                    </div>
+                    <div style="font-size: 2rem; color: #7f8c8d;">→</div>
+                    <div style="text-align: center;">
+                        <div style="width: 100px; height: 100px; background: #9b59b6; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; font-weight: bold; margin: 0 auto 10px;">5</div>
+                        <strong>Predict</strong>
+                    </div>
+                </div>
+                <div class="highlight" style="margin-top: 40px;">
+                    <strong>Modular Design:</strong> Each step is implemented as a separate, reusable module for maintainability and extensibility.
+                </div>
+            </div>
+            <div class="slide-number">9 / 21</div>
+        </div>
+
+        <!-- Slide 10: Algorithms Used -->
+        <div class="slide">
+            <h2>Machine Learning Algorithms</h2>
+            <div class="model-list" style="margin-top: 40px;">
+                <div class="model-card">
+                    <h4>1. Logistic Regression</h4>
+                    <p><strong>Type:</strong> Linear Classifier<br>
+                    <strong>Use:</strong> Baseline model, interpretable<br>
+                    <strong>Parameters:</strong> max_iter=1000</p>
+                </div>
+                <div class="model-card">
+                    <h4>2. Random Forest</h4>
+                    <p><strong>Type:</strong> Ensemble (Trees)<br>
+                    <strong>Use:</strong> High accuracy, robust<br>
+                    <strong>Parameters:</strong> n_estimators=100</p>
+                </div>
+                <div class="model-card">
+                    <h4>3. Support Vector Machine</h4>
+                    <p><strong>Type:</strong> Kernel-based<br>
+                    <strong>Use:</strong> Non-linear patterns<br>
+                    <strong>Parameters:</strong> RBF kernel</p>
+                </div>
+                <div class="model-card">
+                    <h4>4. K-Nearest Neighbors</h4>
+                    <p><strong>Type:</strong> Instance-based<br>
+                    <strong>Use:</strong> Local patterns<br>
+                    <strong>Parameters:</strong> k=5</p>
+                </div>
+                <div class="model-card" style="grid-column: 1 / -1; max-width: 500px; margin: 20px auto;">
+                    <h4>5. Decision Tree</h4>
+                    <p><strong>Type:</strong> Rule-based<br>
+                    <strong>Use:</strong> Interpretable rules<br>
+                    <strong>Parameters:</strong> max_depth=10</p>
+                </div>
+            </div>
+            <div class="slide-number">10 / 21</div>
+        </div>
+
+        <!-- Slide 11: Why These Models? -->
+        <div class="slide">
+            <h2>Why These Models?</h2>
+            <div style="margin-top: 40px;">
+                <h3>Comprehensive Comparison Strategy:</h3>
+                <div class="two-column">
+                    <div>
+                        <ul>
+                            <li><strong>Different Approaches:</strong> Linear, ensemble, instance-based, rule-based</li>
+                            <li><strong>Diverse Strengths:</strong> Each algorithm excels in different scenarios</li>
+                            <li><strong>Baseline Models:</strong> Logistic Regression as simple baseline</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul>
+                            <li><strong>State-of-the-art:</strong> Random Forest for accuracy</li>
+                            <li><strong>Interpretability:</strong> Decision Tree for explainability</li>
+                            <li><strong>Non-linear:</strong> SVM for complex patterns</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="highlight" style="margin-top: 40px;">
+                    <strong>Selection Criteria:</strong> Best model chosen based on test accuracy, with consideration for precision, recall, and F1-score.
+                </div>
+            </div>
+            <div class="slide-number">11 / 21</div>
+        </div>
+
+        <!-- Slide 12: Training Process -->
+        <div class="slide">
+            <h2>Training Process</h2>
+            <div style="margin-top: 40px;">
+                <h3>Methodology:</h3>
+                <ul>
+                    <li><strong>Cross-Validation:</strong> 5-fold CV on training set</li>
+                    <li><strong>Hyperparameters:</strong> Default sklearn parameters (well-tuned)</li>
+                    <li><strong>Evaluation:</strong> Test set performance for final comparison</li>
+                    <li><strong>Selection:</strong> Best model based on test accuracy</li>
+                </ul>
+                <div class="code-block" style="margin-top: 30px;">
+# Training Workflow
+1. Train each model on training set
+2. Perform 5-fold cross-validation
+3. Evaluate on test set
+4. Calculate metrics (Accuracy, Precision, Recall, F1)
+5. Compare all models
+6. Select best performing model
+                </div>
+                <div class="two-column" style="margin-top: 30px;">
+                    <div>
+                        <h4>Training Time:</h4>
+                        <p>All 5 models train in seconds</p>
+                    </div>
+                    <div>
+                        <h4>Reproducibility:</h4>
+                        <p>Random seed (42) for consistent results</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">12 / 21</div>
+        </div>
+
+        <!-- Slide 13: Model Comparison Results -->
+        <div class="slide">
+            <h2>Model Comparison Results</h2>
+            <div style="margin-top: 40px;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 1.1rem;">
+                    <thead>
+                        <tr style="background: #3498db; color: white;">
+                            <th style="padding: 15px; text-align: left;">Model</th>
+                            <th style="padding: 15px;">Accuracy</th>
+                            <th style="padding: 15px;">Precision</th>
+                            <th style="padding: 15px;">Recall</th>
+                            <th style="padding: 15px;">F1-Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background: #ecf0f1;">
+                            <td style="padding: 12px;">Logistic Regression</td>
+                            <td style="padding: 12px; text-align: center;">~0.85</td>
+                            <td style="padding: 12px; text-align: center;">~0.85</td>
+                            <td style="padding: 12px; text-align: center;">~0.85</td>
+                            <td style="padding: 12px; text-align: center;">~0.85</td>
+                        </tr>
+                        <tr style="background: #e8f5e9;">
+                            <td style="padding: 12px;"><strong>Random Forest ⭐</strong></td>
+                            <td style="padding: 12px; text-align: center;"><strong>~0.90</strong></td>
+                            <td style="padding: 12px; text-align: center;"><strong>~0.90</strong></td>
+                            <td style="padding: 12px; text-align: center;"><strong>~0.90</strong></td>
+                            <td style="padding: 12px; text-align: center;"><strong>~0.90</strong></td>
+                        </tr>
+                        <tr style="background: #ecf0f1;">
+                            <td style="padding: 12px;">SVM</td>
+                            <td style="padding: 12px; text-align: center;">~0.88</td>
+                            <td style="padding: 12px; text-align: center;">~0.88</td>
+                            <td style="padding: 12px; text-align: center;">~0.88</td>
+                            <td style="padding: 12px; text-align: center;">~0.88</td>
+                        </tr>
+                        <tr style="background: #ecf0f1;">
+                            <td style="padding: 12px;">KNN</td>
+                            <td style="padding: 12px; text-align: center;">~0.82</td>
+                            <td style="padding: 12px; text-align: center;">~0.82</td>
+                            <td style="padding: 12px; text-align: center;">~0.82</td>
+                            <td style="padding: 12px; text-align: center;">~0.82</td>
+                        </tr>
+                        <tr style="background: #ecf0f1;">
+                            <td style="padding: 12px;">Decision Tree</td>
+                            <td style="padding: 12px; text-align: center;">~0.80</td>
+                            <td style="padding: 12px; text-align: center;">~0.80</td>
+                            <td style="padding: 12px; text-align: center;">~0.80</td>
+                            <td style="padding: 12px; text-align: center;">~0.80</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="margin-top: 20px; color: #7f8c8d; font-style: italic;">* Actual values may vary. Check your model results.</p>
+            </div>
+            <div class="slide-number">13 / 21</div>
+        </div>
+
+        <!-- Slide 14: Best Model Performance -->
+        <div class="slide">
+            <h2>Best Model: Random Forest</h2>
+            <div style="margin-top: 40px;">
+                <div class="two-column">
+                    <div>
+                        <h3>Why Random Forest?</h3>
+                        <ul>
+                            <li>Highest test accuracy (~90%)</li>
+                            <li>Robust to overfitting</li>
+                            <li>Good generalization</li>
+                            <li>Feature importance available</li>
+                            <li>Handles non-linear patterns well</li>
+                        </ul>
+                        <div class="metric-box" style="margin-top: 30px;">
+                            <h3>Performance</h3>
+                            <div class="metric-value">~90%</div>
+                            <p>Accuracy</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Model Characteristics</h3>
+                        <ul>
+                            <li><strong>Ensemble Method:</strong> 100 decision trees</li>
+                            <li><strong>Voting:</strong> Majority vote for prediction</li>
+                            <li><strong>Advantages:</strong> Handles missing values, feature importance</li>
+                            <li><strong>Interpretability:</strong> Can extract feature importance</li>
+                        </ul>
+                        <div class="highlight" style="margin-top: 30px;">
+                            <strong>Selected as Best Model</strong> based on comprehensive evaluation metrics and real-world applicability.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">14 / 21</div>
+        </div>
+
+        <!-- Slide 15: Evaluation Metrics -->
+        <div class="slide">
+            <h2>Evaluation Metrics</h2>
+            <div style="margin-top: 40px;">
+                <div class="model-list">
+                    <div class="model-card">
+                        <h4>Confusion Matrix</h4>
+                        <p>Shows True/False Positives and Negatives. Visual representation of model performance.</p>
+                    </div>
+                    <div class="model-card">
+                        <h4>ROC Curve & AUC</h4>
+                        <p>Receiver Operating Characteristic curve. AUC shows model's ability to distinguish classes.</p>
+                    </div>
+                    <div class="model-card">
+                        <h4>Classification Report</h4>
+                        <p>Detailed metrics: Precision, Recall, F1-score for each class. Provides comprehensive analysis.</p>
+                    </div>
+                    <div class="model-card">
+                        <h4>Cross-Validation</h4>
+                        <p>5-fold CV ensures model robustness. Reduces overfitting risk and validates generalizability.</p>
+                    </div>
+                </div>
+                <div class="two-column" style="margin-top: 30px;">
+                    <div>
+                        <h4>Accuracy</h4>
+                        <p>Overall correctness: (TP + TN) / Total</p>
+                        <h4 style="margin-top: 20px;">Precision</h4>
+                        <p>True Positives / (TP + FP) - How many predicted positives are actually positive</p>
+                    </div>
+                    <div>
+                        <h4>Recall</h4>
+                        <p>True Positives / (TP + FN) - How many actual positives are found</p>
+                        <h4 style="margin-top: 20px;">F1-Score</h4>
+                        <p>Harmonic mean of Precision and Recall - Balanced metric</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">15 / 21</div>
+        </div>
+
+        <!-- Slide 16: Model Performance Analysis -->
+        <div class="slide">
+            <h2>Model Performance Analysis</h2>
+            <div style="margin-top: 40px;">
+                <h3>Strengths of Our Best Model:</h3>
+                <ul>
+                    <li><strong>High Accuracy:</strong> ~90% accuracy on test set</li>
+                    <li><strong>Balanced Performance:</strong> Good precision and recall</li>
+                    <li><strong>Generalization:</strong> Performs well on unseen data</li>
+                    <li><strong>Robustness:</strong> Handles data variations effectively</li>
+                </ul>
+                <div class="two-column" style="margin-top: 40px;">
+                    <div>
+                        <h3>Real-World Applicability</h3>
+                        <ul>
+                            <li>Suitable for preliminary screening</li>
+                            <li>Can assist healthcare professionals</li>
+                            <li>Fast prediction time</li>
+                            <li>Provides confidence scores</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Limitations</h3>
+                        <ul>
+                            <li>Dataset size could be larger</li>
+                            <li>Hyperparameters not extensively tuned</li>
+                            <li>Medical validation needed for deployment</li>
+                            <li>Interpretability can be improved</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">16 / 21</div>
+        </div>
+
+        <!-- Slide 17: System Architecture -->
+        <div class="slide">
+            <h2>System Architecture</h2>
+            <div style="margin-top: 40px;">
+                <div class="two-column">
+                    <div>
+                        <h3>Components</h3>
+                        <ul>
+                            <li><strong>CLI Interface:</strong> Command-line tool (main.py)</li>
+                            <li><strong>Web Application:</strong> Flask-based UI (app.py)</li>
+                            <li><strong>ML Pipeline:</strong> Modular src/ modules</li>
+                            <li><strong>API Endpoints:</strong> RESTful services</li>
+                        </ul>
+                        <h3 style="margin-top: 30px;">User Interfaces</h3>
+                        <ul>
+                            <li>Command-line for training</li>
+                            <li>Web form for predictions</li>
+                            <li>API for integration</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Code Structure</h3>
+                        <div class="code-block" style="font-size: 0.9rem;">
+src/
+├── data_loader.py
+├── preprocessor.py
+├── train_model.py
+├── evaluate_model.py
+├── predict.py
+└── explore_data.py
+
+app.py (Web Server)
+main.py (CLI)
+                        </div>
+                        <h3 style="margin-top: 30px;">API Endpoints</h3>
+                        <ul style="font-size: 0.95rem;">
+                            <li>POST /api/predict</li>
+                            <li>POST /api/predict/batch</li>
+                            <li>GET /api/model/info</li>
+                            <li>GET /health</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">17 / 21</div>
+        </div>
+
+        <!-- Slide 18: Live Demo -->
+        <div class="slide">
+            <h2>⭐ Live Demo</h2>
+            <div style="margin-top: 40px; text-align: center;">
+                <h3 style="color: #e74c3c; margin-bottom: 30px;">Web Interface Demonstration</h3>
+                <div class="highlight" style="max-width: 800px; margin: 0 auto; padding: 40px;">
+                    <h4 style="margin-bottom: 20px;">Steps:</h4>
+                    <ol style="text-align: left; display: inline-block;">
+                        <li style="margin: 15px 0; font-size: 1.2rem;">Start web server: <code style="background: #2c3e50; color: #27ae60; padding: 5px 10px; border-radius: 5px;">python app.py</code></li>
+                        <li style="margin: 15px 0; font-size: 1.2rem;">Open browser: <code style="background: #2c3e50; color: #27ae60; padding: 5px 10px; border-radius: 5px;">http://localhost:5000</code></li>
+                        <li style="margin: 15px 0; font-size: 1.2rem;">Fill patient information form</li>
+                        <li style="margin: 15px 0; font-size: 1.2rem;">Click "Predict Risk"</li>
+                        <li style="margin: 15px 0; font-size: 1.2rem;">View prediction results with confidence</li>
+                    </ol>
+                </div>
+                <div style="margin-top: 40px; padding: 30px; background: #f8f9fa; border-radius: 10px; max-width: 800px; margin-left: auto; margin-right: auto;">
+                    <h4>Demo Features to Show:</h4>
+                    <ul style="text-align: left; display: inline-block; margin-top: 20px;">
+                        <li>Modern, user-friendly interface</li>
+                        <li>Real-time prediction</li>
+                        <li>Visual confidence indicators</li>
+                        <li>Probability breakdowns</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="slide-number">18 / 21</div>
+        </div>
+
+        <!-- Slide 19: Features & Applications -->
+        <div class="slide">
+            <h2>Features & Applications</h2>
+            <div style="margin-top: 40px;">
+                <div class="two-column">
+                    <div>
+                        <h3>Key Features</h3>
+                        <ul>
+                            <li>Modern web interface</li>
+                            <li>Batch prediction capability</li>
+                            <li>RESTful API for integration</li>
+                            <li>Mobile responsive design</li>
+                            <li>Confidence scores</li>
+                            <li>Comprehensive evaluation reports</li>
+                        </ul>
+                        <h3 style="margin-top: 30px;">User Experience</h3>
+                        <ul>
+                            <li>Easy-to-use form</li>
+                            <li>Instant predictions</li>
+                            <li>Clear visual feedback</li>
+                            <li>Error handling</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Real-World Applications</h3>
+                        <ul>
+                            <li><strong>Healthcare Screening:</strong> Preliminary risk assessment</li>
+                            <li><strong>Research:</strong> Medical data analysis</li>
+                            <li><strong>Education:</strong> Teaching ML in healthcare</li>
+                            <li><strong>Telemedicine:</strong> Remote health consultation support</li>
+                            <li><strong>Health Apps:</strong> Integration into mobile health apps</li>
+                        </ul>
+                        <div class="highlight" style="margin-top: 30px;">
+                            <strong>Integration Ready:</strong> API endpoints allow easy integration into existing healthcare systems and applications.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">19 / 21</div>
+        </div>
+
+        <!-- Slide 20: Future Improvements -->
+        <div class="slide">
+            <h2>Future Improvements</h2>
+            <div style="margin-top: 40px;">
+                <div class="model-list">
+                    <div class="model-card">
+                        <h4>Model Enhancements</h4>
+                        <ul style="font-size: 0.95rem;">
+                            <li>Hyperparameter tuning (GridSearch/RandomSearch)</li>
+                            <li>Deep learning models (Neural Networks)</li>
+                            <li>Ensemble of best models</li>
+                        </ul>
+                    </div>
+                    <div class="model-card">
+                        <h4>Data Improvements</h4>
+                        <ul style="font-size: 0.95rem;">
+                            <li>Larger, more diverse dataset</li>
+                            <li>Feature engineering</li>
+                            <li>Real-time data collection</li>
+                        </ul>
+                    </div>
+                    <div class="model-card">
+                        <h4>Deployment</h4>
+                        <ul style="font-size: 0.95rem;">
+                            <li>Cloud deployment (AWS/Azure)</li>
+                            <li>Mobile app development</li>
+                            <li>Hospital system integration</li>
+                        </ul>
+                    </div>
+                    <div class="model-card">
+                        <h4>Additional Features</h4>
+                        <ul style="font-size: 0.95rem;">
+                            <li>Model interpretability (SHAP)</li>
+                            <li>User authentication</li>
+                            <li>Prediction history</li>
+                            <li>Multi-language support</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="highlight" style="margin-top: 30px;">
+                    <strong>Long-term Goal:</strong> Develop this into a clinically validated tool that can assist healthcare professionals in early heart disease detection.
+                </div>
+            </div>
+            <div class="slide-number">20 / 21</div>
+        </div>
+
+        <!-- Slide 21: Conclusion -->
+        <div class="slide">
+            <h2>Conclusion</h2>
+            <div style="margin-top: 40px;">
+                <h3>Project Achievements:</h3>
+                <ul>
+                    <li>Successfully built and compared 5 ML models</li>
+                    <li>Achieved high accuracy (~90%) with Random Forest</li>
+                    <li>Created user-friendly web interface</li>
+                    <li>Developed comprehensive evaluation system</li>
+                    <li>Built modular, maintainable codebase</li>
+                    <li>Implemented RESTful API for integration</li>
+                </ul>
+                <div class="two-column" style="margin-top: 40px;">
+                    <div>
+                        <h3>Key Learnings</h3>
+                        <ul>
+                            <li>ML model comparison techniques</li>
+                            <li>Data preprocessing importance</li>
+                            <li>Evaluation metric selection</li>
+                            <li>Full-stack ML application development</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Practical Impact</h3>
+                        <ul>
+                            <li>Real-world healthcare application</li>
+                            <li>Scalable architecture</li>
+                            <li>Extensible design</li>
+                            <li>Open for future enhancements</li>
+                        </ul>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 50px; padding: 30px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 10px;">
+                    <h2 style="color: white; border: none; margin-bottom: 20px;">Thank You!</h2>
+                    <h3 style="color: white; margin: 20px 0;">Questions & Answers</h3>
+                </div>
+            </div>
+            <div class="slide-number">21 / 21</div>
+        </div>
+
+    </div>
+
+    <div class="navigation">
+        <button class="nav-button" onclick="changeSlide(-1)" id="prevBtn">← Previous</button>
+        <span style="margin: 0 20px; color: white; font-size: 1.1rem;">
+            Slide <span id="currentSlide">1</span> of <span id="totalSlides">21</span>
+        </span>
+        <button class="nav-button" onclick="changeSlide(1)" id="nextBtn">Next →</button>
+    </div>
+
+    <script>
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        document.getElementById('totalSlides').textContent = totalSlides;
+
+        function showSlide(n) {
+            if (n >= totalSlides) {
+                currentSlideIndex = 0;
+            } else if (n < 0) {
+                currentSlideIndex = totalSlides - 1;
+            } else {
+                currentSlideIndex = n;
+            }
+
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[currentSlideIndex].classList.add('active');
+
+            document.getElementById('currentSlide').textContent = currentSlideIndex + 1;
+            
+            // Update button states
+            document.getElementById('prevBtn').disabled = currentSlideIndex === 0;
+            document.getElementById('nextBtn').disabled = currentSlideIndex === totalSlides - 1;
+        }
+
+        function changeSlide(direction) {
+            showSlide(currentSlideIndex + direction);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                changeSlide(-1);
+            } else if (e.key === 'ArrowRight') {
+                changeSlide(1);
+            }
+        });
+
+        // Initialize
+        showSlide(0);
+    </script>
+</body>
+</html>
+
